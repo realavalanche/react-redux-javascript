@@ -11,6 +11,7 @@ const reducer = (state = initialState, action) => {
     const {
         type,
         studentDetails,
+        classmate
     } = action
 
     switch (type) {
@@ -34,6 +35,9 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 count: state.count - 1
             }
+
+        case 'ADD_CLASSMATE':
+            return [...state, classmate]
 
         default:
             return state
