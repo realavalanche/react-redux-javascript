@@ -1,11 +1,14 @@
 import React from 'react'
+import styles from '../App.module.css';
 
 const Student = ({ student }) => {
     return (
         <React.Fragment>
-            <div>
-                <span>{`Student Name: ${student.name}`}</span>
-                <span>{`Student Age: ${student.age}`}</span>
+            <div className={styles.namecontent}>
+                <span className={styles["student-name"]}>{`${student.name}`}</span>
+            </div>
+            <div className={styles.agecontent}>
+                <span className={styles["student-age"]}>{`${student.age}`}</span>
             </div>
         </React.Fragment>
     )

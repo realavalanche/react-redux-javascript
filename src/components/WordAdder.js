@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import ListOfWords from './ListOfWords'
+import styles from '../App.module.css';
 
 class WordAdder extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class WordAdder extends React.Component {
     render() {
         return (
             <div>
-                <a className='btn' onClick={this.handleClick}>Add Word</a>
+                <a style={{ marginRight: 20 }} className={styles.btn} onClick={this.handleClick}>Add Word</a>
                 <ListOfWords words={this.state.words} />
             </div>
         );

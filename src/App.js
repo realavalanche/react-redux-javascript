@@ -6,7 +6,7 @@ import { fetchData } from './actions/actions';
 
 import Student from './components/Student';
 import WordAdder from './components/WordAdder'
-import './App.css';
+import styles from './App.module.css';
 import Axios from 'axios';
 import reducer from './reducers/reducer';
 
@@ -51,39 +51,43 @@ function App({ students, count, addStudent, incrementCount, decrementCount, fetc
   }
 
   return (
-    <>
-      <div>
+    <div className={styles.container}>
+      <div className={styles["student-container"]}>
+        <div className={styles.name}>
+          <span>{`Student Name`}</span>
+        </div>
+        <div className={styles.age}>
+          <span>{`Student Age`}</span>
+        </div>
         {
           students.map(student => {
             return <Student key={student.name} student={student} />
           })
         }
       </div>
-      <div>
-        <input type="text" onChange={studentName} />
+      <div style={{ margin: "20px 0" }}>
+        <input style={{ marginRight: "20px" }}type="text" onChange={studentName} />
+        <a className={styles.btn} onClick={callService}>Add Student</a>
       </div>
-      <div>
-        <a className='btn add-btn' onClick={callService}>Add Student</a>
-      </div>
-      <div>
-        {count}
-      </div>
-      <div>
-        <a className='btn' onClick={increment}>Increment</a>
-      </div>
-      <div>
-        <a className='btn' onClick={decrement}>Decrement</a>
-      </div>
-      <br /><br />
-      <WordAdder />
-      <br />
-      <ul>
+      <div style={{ margin: "20px 0" }}>
+        <span>useReducer Implementation</span>
         {classmates.map(({ id, name }) => {
-          return <li key={id}>{name}</li>
+          return <div key={id}>{name}</div>
         })}
-      </ul>
-
-    </>
+      </div>
+      <div style={{ margin: "15px 0" }}>
+        <span style={{ margin: "10px 0" }}>
+          {count}
+        </span>
+        <span style={{ margin: "0 10px" }}>
+          <a style={{ background: "linear-gradient(45deg, transparent, grey)", cursor: 'pointer', border: '#282c34 solid 1px' }} onClick={increment}>Increment</a>
+        </span>
+        <span style={{ margin: "0 10px" }}>
+          <a style={{ boxShadow: '1px 1px 5px blue' }} className={styles.btn} onClick={decrement}>Decrement</a>
+        </span>
+      </div>
+      <WordAdder />
+    </div>
   );
 }
 

@@ -1,0 +1,82 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  padding: 10px;
+  margin: 10px;
+}
+
+.btn {
+  padding: 2px;
+  /* margin: 10px; */
+  background-color: cadetblue;
+  border: #282c34 solid 1px;
+  cursor: pointer;
+}
+
+.student-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(auto-fit, 150px);
+  grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
+}
+
+.name {
+  grid-column: 1 / 2;
+  background-color: #61dafb;
+  /* grid-row: 1 / 2; */
+}
+
+.age {
+  /* grid-column: 2 / 3; */
+  background-color: beige;
+  /* grid-row: 1 / 2; */
+}
+
+.namecontent {
+  grid-column: 1 / 2;
+  background-color: lightcoral;
+  /* grid-row: 2 / -1; */
+}
+
+.agecontent {
+  /* grid-column: 2 / 3; */
+  background-color: lightcoral;
+  /* grid-row: 2 / -1; */
+}
