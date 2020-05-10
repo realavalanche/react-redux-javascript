@@ -5,7 +5,7 @@ const Student = ({ student }) => {
     return (
         <React.Fragment>
             <div className={styles.namecontent}>
-                <span className={styles["student-name"]}>{`${student.name}`}</span>
+                <span id="student-name" className={styles["student-name"]}>{`${student.name}`}</span>
             </div>
             <div className={styles.agecontent}>
                 <span className={styles["student-age"]}>{`${student.age}`}</span>

@@ -9,6 +9,7 @@ import reducer from './reducers/reducer'
 
 import './index.css';
 import App from './App';
+import Root from './Root'
 import * as serviceWorker from './serviceWorker';
 
 
@@ -18,6 +19,7 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <App />
+      <Root/>
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')

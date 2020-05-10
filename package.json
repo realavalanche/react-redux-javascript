@@ -71,7 +71,10 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "test:unit": "NODE_ENV=test mocha --require @babel/register --require ./test/helpers.js --require ./test/dom.js --require ignore-styles 'src/**/*.test.js'",
+    "test:unit:watch": "npm run test:unit -- --watch",
+    "test:coverage": "NODE_ENV=test nyc mocha --require @babel/register --require ./test/helpers.js --require ./test/dom.js --require ignore-styles 'src/**/*.test.js'"
   },
   "extends": [
     "plugin:react-hooks/recommended"
@@ -144,6 +147,33 @@
   "babel": {
     "presets": [
       "react-app"
-    ]
+    ],
+    "plugins": [
+      "rewire"
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "rewire"
+        ]
+      }
+    }
+  },
+  "devDependencies": {
+    "@babel/register": "^7.9.0",
+    "babel-plugin-rewire": "^1.2.0",
+    "chai": "^4.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "eslint-plugin-chai-expect": "^2.1.0",
+    "ignore-styles": "^5.0.1",
+    "isomorphic-fetch": "^2.2.1",
+    "jsdom": "^16.2.2",
+    "mocha": "^7.1.2",
+    "moxios": "^0.4.0",
+    "nyc": "^15.0.1",
+    "redux-mock-store": "^1.5.4",
+    "sinon": "^9.0.2",
+    "sinon-chai": "^3.5.0"
   }
 }

@@ -20,20 +20,36 @@ function App({ students, count, addStudent, incrementCount, decrementCount, fetc
     address: '234 FoxWord Dr OH 20133'
   }])
 
+  // const fetchUsers = async () => {
+  //   console.log('check u')
+  //   await Axios.get('http://jsonplaceholder.typicode.com/users')
+  // }
+
   useEffect(() => {
-    Axios.get('http://jsonplaceholder.typicode.com/users').then(({ data }) => {
-      console.log(data)
-      // debugger
-      dispatch({
-        type: 'ADD_CLASSMATE',
-        classmate: {
-          id: 100,
-          name: 'new mate',
-          username: 'mate name',
-          email: 'mate@gmail.com',
-          address: '534 Noida 34133'
-        }
-      })
+    // Axios.get('http://jsonplaceholder.typicode.com/users').then(({ data }) => {
+    //   // console.log('LC', data)
+    //   // debugger
+    //   dispatch({
+    //     type: 'ADD_CLASSMATE',
+    //     classmate: {
+    //       id: 100,
+    //       name: 'new mate',
+    //       username: 'mate name',
+    //       email: 'mate@gmail.com',
+    //       address: '534 Noida 34133'
+    //     }
+    //   })
+    // })
+    fetchUsers()
+    dispatch({
+      type: 'ADD_CLASSMATE',
+      classmate: {
+        id: 100,
+        name: 'new mate',
+        username: 'mate name',
+        email: 'mate@gmail.com',
+        address: '534 Noida 34133'
+      }
     })
   }, [])
 
@@ -51,7 +67,7 @@ function App({ students, count, addStudent, incrementCount, decrementCount, fetc
   }
 
   return (
-    <div className={styles.container}>
+    <div id="container" className={styles.container}>
       <div className={styles["student-container"]}>
         <div className={styles.name}>
           <span>{`Student Name`}</span>
@@ -61,22 +77,23 @@ function App({ students, count, addStudent, incrementCount, decrementCount, fetc
         </div>
         {
           students.map(student => {
-            return <Student key={student.name} student={student} />
+            return <Student data-test="student" key={student.name} student={student} />
           })
         }
       </div>
+      <div id="simulate">{name}</div>
       <div style={{ margin: "20px 0" }}>
-        <input style={{ marginRight: "20px" }}type="text" onChange={studentName} />
+        <input style={{ marginRight: "20px" }} type="text" onChange={studentName} />
         <a className={styles.btn} onClick={callService}>Add Student</a>
       </div>
       <div style={{ margin: "20px 0" }}>
         <span>useReducer Implementation</span>
         {classmates.map(({ id, name }) => {
-          return <div key={id}>{name}</div>
+          return <div data-test="classmate" key={id}>{name}</div>
         })}
       </div>
       <div style={{ margin: "15px 0" }}>
-        <span style={{ margin: "10px 0" }}>
+        <span id="count" style={{ margin: "10px 0" }}>
           {count}
         </span>
         <span style={{ margin: "0 10px" }}>
@@ -86,7 +103,7 @@ function App({ students, count, addStudent, incrementCount, decrementCount, fetc
           <a style={{ boxShadow: '1px 1px 5px blue' }} className={styles.btn} onClick={decrement}>Decrement</a>
         </span>
       </div>
-      <WordAdder />
+      <WordAdder data-test="adder" propsForTestCase={[1, 2]} />
     </div>
   );
 }
@@ -105,14 +122,20 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addStudent: studentDetails => dispatch({ type: 'ADD_STUDENT', studentDetails }),
+    // addStudent: studentDetails => dispatch({ type: 'ADD_STUDENT', studentDetails }),
     incrementCount: () => dispatch({ type: 'INCREMENT_COUNT' }),
     decrementCount: () => dispatch({ type: 'DECREMENT_COUNT' }),
-    fetch: studentDetails => dispatch(fetchData(studentDetails)).then((data) => {
-      console.log(data)
-      // dispatch({ type: 'ADD_STUDENT', studentDetails })
+    fetch: studentDetails => dispatch(fetchData(studentDetails))
+    .then((data) => {
+      // console.log(studentDetails)
+      dispatch({ type: 'ADD_STUDENT', studentDetails })
     })
   }
+}
+
+export const fetchUsers = async () => {
+  // console.log('original method')
+  return Axios.get('http://jsonplaceholder.typicode.com/users')
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
