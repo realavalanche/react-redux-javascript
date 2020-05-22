@@ -5,10 +5,12 @@ import { connect } from 'react-redux'
 import { fetchData } from './actions/actions';
 
 import Student from './components/Student';
-import WordAdder from './components/WordAdder'
+// import WordAdder from './components/WordAdder'
 import styles from './App.module.css';
 import Axios from 'axios';
-import reducer from './reducers/reducer';
+import reducer, { selectStudents } from './reducers/reducer';
+
+const WordAdder = React.lazy(() => import('./components/WordAdder'))
 
 function App({ students, count, addStudent, incrementCount, decrementCount, fetch }) {
   const [name, setName] = useState('mukesh')
@@ -103,7 +105,9 @@ function App({ students, count, addStudent, incrementCount, decrementCount, fetc
           <a style={{ boxShadow: '1px 1px 5px blue' }} className={styles.btn} onClick={decrement}>Decrement</a>
         </span>
       </div>
-      <WordAdder data-test="adder" propsForTestCase={[1, 2]} />
+      <React.Suspense fallback={<div>loading......</div>}>
+        <WordAdder data-test="adder" propsForTestCase={[1, 2]} />
+      </React.Suspense>
     </div>
   );
 }
@@ -114,7 +118,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    students: state.students,
+    students: selectStudents(state),
     name: state.name,
     count: state.count
   }
@@ -126,10 +130,10 @@ const mapDispatchToProps = (dispatch) => {
     incrementCount: () => dispatch({ type: 'INCREMENT_COUNT' }),
     decrementCount: () => dispatch({ type: 'DECREMENT_COUNT' }),
     fetch: studentDetails => dispatch(fetchData(studentDetails))
-    .then((data) => {
-      // console.log(studentDetails)
-      dispatch({ type: 'ADD_STUDENT', studentDetails })
-    })
+      .then((data) => {
+        // console.log(studentDetails)
+        dispatch({ type: 'ADD_STUDENT', studentDetails })
+      })
   }
 }
 

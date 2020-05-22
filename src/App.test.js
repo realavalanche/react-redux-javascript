@@ -5,7 +5,6 @@ import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import App, { __RewireAPI__ as RewireAPI, fetchUsers } from './App';
 import { shallow, mount } from 'enzyme'
-import Axios from 'axios'
 import moxios from 'moxios'
 
 const configure = state => {

@@ -1,3 +1,4 @@
+
 const initialState = {
     students: [
         { name: 'sid', age: 34 },
@@ -7,6 +8,7 @@ const initialState = {
     count: 0
 }
 
+//reducer
 const reducer = (state = initialState, action) => {
     const {
         type,
@@ -42,6 +44,12 @@ const reducer = (state = initialState, action) => {
         default:
             return state
     }
+}
+
+
+// Selectors - give selector as suffix or select as prefix
+export function selectStudents(state) {
+    return state.students.filter(student => student.age > 30)
 }
 
 export default reducer
