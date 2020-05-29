@@ -4,8 +4,8 @@ export const fetchData = (studentDetails) => { // action is returning a function
         //     dispatch({ type: 'ADD_STUDENT', studentDetails })
         // }, 3000);
         return fetch('http://jsonplaceholder.typicode.com/users').then(response => response.json()).then((data) => { //.then always returns a promise
-            console.log(data)
-            dispatch({ type: 'ADD_STUDENT', studentDetails })
+            return data
+            // dispatch({ type: 'ADD_STUDENT', studentDetails })
         })
     }
 }

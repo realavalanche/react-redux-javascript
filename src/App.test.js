@@ -1,5 +1,5 @@
 import React from 'react';
-import { expect } from 'chai'
+// import { expect } from 'chai'
 import sinon from 'sinon'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
@@ -77,7 +77,7 @@ describe('App', () => {
 
   // Events - test 3 things
   /*
-    1. stub call (if props present, send in setup)
+    1. stub call (if passed from parent to child as props, pass stub in setup)
     2. match dispatched actions (if redux dispatch)
     3. match final value
   */
@@ -86,13 +86,13 @@ describe('App', () => {
   it('should update student name on simulate div on entering name in input textbox', () => {
     // wrapper.find('input').simulate('change', { target: { value: '44' } }) // Type 1 - use simulate
     wrapper.find('input').props().onChange({ target: { value: '44' } }) // Type 2 - can also call props directly
-    // expect(setNametStub).to.be.calledOnce // won't work because setName is not and external function
+    // expect(setNameStub).to.be.calledOnce // won't work because setName is not and external function
     expect(wrapper.find('#simulate').text()).to.equal('44');
   })
 
   // Handler - test 2 things
   /*
-    1. stub call (if props present, send in setup)
+    1. stub calls (for actions dispatched)
     2. match dispatched actions (if redux dispatch)
   */
 
@@ -125,14 +125,16 @@ describe('App', () => {
 
   // useEffect handler - this is not redux dispatch so just test if stub is called and final state is updated
   it('useEffect LC handler', () => {
-    RewireAPI.__Rewire__('fetchUsers', fetchUsersStub)
     const wrapper = mount(<App store={configure(initialState)} />)
-    expect(fetchUsersStub).to.have.been.calledOnce // check stub call
+    // const useEffectSpy = sinon.spy(App.prototype, 'useEffect') // could do this if class component
+    // expect(useEffectSpy.calledOnce).to.equal(true)  // could do this if class component
+    expect(fetchUsersStub.calledOnce).to.equal(true) // check stub call
+    // expect(fetchUsersStub).to.have.been.calledOnce // throws lint error
     expect(wrapper.find('[data-test="classmate"]').at(1).text()).to.equal('new mate') // final result
     expect(wrapper.find('[data-test="classmate"]').length).to.equal(2) // final result
   })
 
-  it('mock fetchUsers call', async () => {
+  it('mock fetchUsers axios call', async () => {
     // const sandbox = sinon.createSandbox()
     // sandbox.restore()
     // sinon.stub(Axios, 'get');

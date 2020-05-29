@@ -23,7 +23,7 @@ class WordAdder extends React.Component {
         return (
             <div>
                 <a style={{ marginRight: 20 }} className={styles.btn} onClick={this.handleClick}>Add Word</a>
-                <ListOfWords words={this.state.words} />
+                <ListOfWords data-test="list-of-words" words={this.state.words} />
             </div>
         );
     }

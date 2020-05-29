@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useReducer } from 'react';
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+// import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import { fetchData } from './actions/actions';
 
 import Student from './components/Student';
@@ -108,13 +109,25 @@ function App({ students, count, addStudent, incrementCount, decrementCount, fetc
       <React.Suspense fallback={<div>loading......</div>}>
         <WordAdder data-test="adder" propsForTestCase={[1, 2]} />
       </React.Suspense>
+      {/* <BrowserRouter>
+        <Link to="/test">Test Page</Link>
+        <Link to="/add">Adder Page</Link>
+        <Switch>
+          <Route path="/test" render={() => <div>Test Page</div>} />
+          <Route path="/add" render={() => (
+            <React.Suspense fallback={<div>loading......</div>}>
+              <WordAdder data-test="adder" propsForTestCase={[1, 2]} />
+            </React.Suspense>
+          )} />
+        </Switch>
+      </BrowserRouter> */}
     </div>
   );
 }
 
-App.propTypes = {
-  student: PropTypes.shape({})
-}
+// App.propTypes = {
+//   student: PropTypes.shape({})
+// }
 
 const mapStateToProps = (state) => {
   return {
