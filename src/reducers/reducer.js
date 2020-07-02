@@ -40,6 +40,7 @@ const reducer = (state = initialState, action) => {
 
         case 'ADD_CLASSMATE':
             return [...state, classmate]
+            // for redux reducer always a big store is returned; here it is mostly array (because it just one field of store which has array data value)
 
         default:
             return state

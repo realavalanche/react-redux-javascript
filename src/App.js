@@ -22,6 +22,7 @@ function App({ students, count, addStudent, incrementCount, decrementCount, fetc
     email: 'abc@gmail.com',
     address: '234 FoxWord Dr OH 20133'
   }])
+  // useReducer used mostly when you need to add data to array e.g. students. Initial state will also be array because it just one field of store
 
   // const fetchUsers = async () => {
   //   console.log('check u')
